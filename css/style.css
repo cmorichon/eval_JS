@@ -1,0 +1,8 @@
+.height-interface{
+    height:100vh;
+}
+@media  screen and (min-width:1024px){
+    .height-interface-lg{
+        height:100vh;
+    }   
+}
