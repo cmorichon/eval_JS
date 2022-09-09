@@ -14,19 +14,19 @@
 <body>
     <main>
         <div class="flex justify-center absolute text-lg lg:text-xl" style="width:100%">
-            <button>New Game</button>
+            <button type="button" id="newGame">Nouvelle partie</button>
         </div>
         <div class="flex justify-center absolute position-des">
             <span>Dés</span>
         </div>
 
         <div class="flex justify-center absolute position-container-stop-button">
-            <div class="grid gap-5 grid-cols-2 position-stop-button text-lg lg:text-xl">
+            <div class="grid gap-5 grid-cols-2 position-stop-button text-center text-lg lg:text-xl">
                 <div>
-                    <button>relancer</button>
+                    <button type="button" id="rollDice">Lancer</button>
                 </div>
                 <div>
-                    <button>stopper</button>
+                    <button type="button" id="hold">Passer la main</button>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <span>Player 1</span>
                 </div>
                 <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
-                    <span>0</span>
+                    <span id="currentScorePlayer1">0</span>
                 </div>
                 <div class=" col-span-6"></div>
                 <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
@@ -47,7 +47,7 @@
                         <span>Global</span>
                     </div>
                     <div>
-                        <span>0</span>
+                        <span id="globalScorePlayer1">0</span>
                     </div>
                 </div>
                 <div class=" col-span-6"></div>
@@ -58,7 +58,7 @@
                     <span>Player 2</span>
                 </div>
                 <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
-                    <span>0</span>
+                    <span id="currentScorePlayer2">0</span>
                 </div>
                 <div class=" col-span-6"></div>
                 <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
@@ -66,13 +66,14 @@
                         <span>Global</span>
                     </div>
                     <div>
-                        <span>0</span>
+                        <span id="globalScorePlayer2">0</span>
                     </div>
                 </div>
                 <div class=" col-span-6"></div>
             </div>
         </div>
     </main>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
