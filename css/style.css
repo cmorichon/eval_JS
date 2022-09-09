@@ -17,6 +17,19 @@ h1,h2,h3,p,span{
     bottom:45%
 }
 
+.player-active:after{
+content:'\A ';
+background:blue;
+border-radius:9999px;
+width: 10px;
+height: 10px;
+display:inline-block;
+position:relative;
+top:-6px;
+padding:0.2em;
+margin-left:10px;
+}
+
 @media  screen and (min-width:1024px){
     .height-interface-lg{
         height:100vh;
