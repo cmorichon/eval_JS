@@ -1,27 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
     <title>Evaluation JS</title>
 </head>
+
 <body>
-    <main class="">
-        <div>
-    <div class="grid lg:grid-cols-2  md:grid-rows-2 height-interface" >
-        <div class="bg-violet-200 height-interface-lg">
-        
+    <main>
+        <div class="flex justify-center absolute text-lg lg:text-xl" style="width:100%">
+            <button>New Game</button>
         </div>
-        <div class="bg-violet-300 height-interface-lg" >
-        
+        <div class="flex justify-center absolute position-des">
+            <span>Dés</span>
         </div>
-    </div>
-</div>
-</main>
-    
-    
+
+        <div class="flex justify-center absolute position-container-stop-button">
+            <div class="grid gap-5 grid-cols-2 position-stop-button text-lg lg:text-xl">
+                <div>
+                    <button>relancer</button>
+                </div>
+                <div>
+                    <button>stopper</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="grid lg:grid-cols-2  md:grid-rows-2 height-interface">
+            <div class="bg-violet-200 height-interface-lg grid grid-cols-6 gap-2">
+                <div class=" col-span-6"></div>
+                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl">
+                    <span>Player 1</span>
+                </div>
+                <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
+                    <span>0</span>
+                </div>
+                <div class=" col-span-6"></div>
+                <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
+                    <div>
+                        <span>Global</span>
+                    </div>
+                    <div>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class=" col-span-6"></div>
+            </div>
+            <div class="bg-violet-300 height-interface-lg grid grid-cols-6 gap-2">
+                <div class=" col-span-6"></div>
+                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl">
+                    <span>Player 2</span>
+                </div>
+                <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
+                    <span>0</span>
+                </div>
+                <div class=" col-span-6"></div>
+                <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
+                    <div>
+                        <span>Global</span>
+                    </div>
+                    <div>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class=" col-span-6"></div>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>

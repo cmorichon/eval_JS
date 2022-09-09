@@ -1,8 +1,32 @@
+h1,h2,h3,p,span{
+    font-family:  'Lato, sans-serif';
+}
+
 .height-interface{
     height:100vh;
 }
+.position-container-stop-button{
+    width:100%;  
+    left:0%; 
+    bottom:0%
+}
+.position-des{
+    width:20%; 
+    height:10vh; 
+    left:40%; 
+    bottom:45%
+}
+
 @media  screen and (min-width:1024px){
     .height-interface-lg{
         height:100vh;
-    }   
+    } 
+    .position-stop-button{
+        grid-template-columns: 2fr !important;
+    }
+    .position-container-stop-button{
+        width:20%;  
+        left:40%; 
+        bottom:20%
+    }
 }
