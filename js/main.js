@@ -1,3 +1,4 @@
+// Add class Players
 class Players {
   constructor (current, global, turn, name) {
     this.current = current
@@ -20,10 +21,11 @@ class Players {
   }
 }
 
+// Get value of botton
 const newGame = document.querySelector('#newGame')
 const rollDice = document.querySelector('#rollDice')
 const hold = document.querySelector('#hold')
-
+// Get value of players
 const titlePlayer1 = document.querySelector('#player1')
 const titlePlayer2 = document.querySelector('#player2')
 const sectionPlayer1 = document.querySelector('#sectionPlayer1')
@@ -38,21 +40,47 @@ const globalScorePlayer2 = document.querySelector('#globalScorePlayer2')
 let player1 = new Players(0, 0, true)
 let player2 = new Players(0, 0, false)
 whosTurn()
-namePlayer()
+askPlayerName().then(success, error)
 
-function namePlayer () {
-  player1.name = prompt('Joueur 1, quel est votre prénom ?')
-  player2.name = prompt('Joueur 2, quel est votre prénom ?')
+// Fonction for display prompt ask usernames
+function namePlayer (player) {
+  return prompt(player + ' quel est votre prénom ?')
+}
+// Declaration of promise to verify the structure of usernames
+function askPlayerName () {
+  const regex = new RegExp('[a-z]')
+  return new Promise((resolve, reject) => {
+    const firstPlayer = namePlayer('Joueur 1')
+    const secondPlayer = namePlayer('Joueur 2')
+    if (firstPlayer.match(regex) && secondPlayer.match(regex)) {
+      player1.name = firstPlayer
+      player2.name = secondPlayer
+      resolve()
+    } else {
+      reject()
+    }
+  })
+}
+function success () {
   titlePlayer1.innerHTML = player1.name
   titlePlayer2.innerHTML = player2.name
 }
+function error () {
+  alert('Merci de saisir des noms de joueurs valides, ne doit pas contenir de chiffres, d\'espaces ou être vide.')
+  askPlayerName().then(success, error)
+}
+// End of Promise
 
+// Function display, allow to refresh the screen
 function display () {
   currentScorePlayer1.innerHTML = player1.current.toString()
   globalScorePlayer1.innerHTML = player1.global.toString()
   currentScorePlayer2.innerHTML = player2.current.toString()
   globalScorePlayer2.innerHTML = player2.global.toString()
 }
+// End of function display
+
+// Function Whos turn, allow to verify who's player is turn
 function whosTurn () {
   if (player1.turn !== true) {
     titlePlayer2.classList.add('player-active')
@@ -68,25 +96,34 @@ function whosTurn () {
     return player1
   }
 }
+// End of function whos turn
 
+// Function controlGameFinish, allow to verify if a score as higher 100 points
 function controlGameFinish (player) {
   if (player1.global >= 100 || player2.global >= 100) {
     alert(`La partie est terminée, le joueur ${player.name} à remporté le jeu avec ${player.global} points`)
   }
 }
+// End of function controlGameFinish
 
+// Function changeTurnPlayer, allow change the turn for current player
 function changeTurnPlayer () {
   player1.turn = !player1.turn
   player2.turn = !player2.turn
 }
+// End of changeTurnPlayer
 
+// Click event for newGame
 newGame.addEventListener('click', e => {
   e.preventDefault()
   player1 = new Players(0, 0, true)
   player2 = new Players(0, 0, false)
+  askPlayerName().then(success, error)
   display()
 })
+// End of click event newGame
 
+// Click event for roll the dice
 rollDice.addEventListener('click', e => {
   e.preventDefault()
   let numberDice = Math.floor(Math.random() * 7)
@@ -108,7 +145,9 @@ rollDice.addEventListener('click', e => {
   whosTurn()
   display()
 })
+// End of click event for roll the dice
 
+// Click event for give the hand at other player
 hold.addEventListener('click', e => {
   e.preventDefault()
   const playerActive = whosTurn()
@@ -118,3 +157,4 @@ hold.addEventListener('click', e => {
   whosTurn()
   controlGameFinish(playerActive)
 })
+// End of click event
