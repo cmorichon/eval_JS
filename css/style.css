@@ -19,7 +19,7 @@ h1,h2,h3,p,span{
 
 .player-active:after{
 content:'\A ';
-background:blue;
+background:rgb(22, 138, 158);
 border-radius:9999px;
 width: 10px;
 height: 10px;
@@ -28,6 +28,11 @@ position:relative;
 top:-6px;
 padding:0.2em;
 margin-left:10px;
+}
+.center-object{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media  screen and (min-width:1024px){

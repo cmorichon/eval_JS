@@ -7,25 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
     <title>Evaluation JS</title>
 </head>
 
 <body>
     <main>
-        <div class="flex justify-center absolute text-lg lg:text-xl" style="width:100%">
+        <div class="flex justify-center absolute text-lg lg:text-xl mt-3 shadow-md lg:p-2" style="width:100%">
+            <img class="w-7 mr-5" src="img/new.png" alt="">
             <button type="button" id="newGame">Nouvelle partie</button>
         </div>
         <div class="flex justify-center absolute position-des">
-            <span>Dés</span>
+            <canvas id="canvasDice" width="300" height="300">
+            </canvas>
         </div>
 
         <div class="flex justify-center absolute position-container-stop-button">
             <div class="grid gap-5 grid-cols-2 position-stop-button text-center text-lg lg:text-xl">
-                <div>
+                <div class="flex flex-row shadow-md rounded-full lg:p-2">
+                    <img class="w-7 mr-5" src="img/rolldice.png" alt="">
                     <button type="button" id="rollDice">Lancer</button>
                 </div>
-                <div>
+                <div class="flex flex-row shadow-md rounded-full lg:p-2">
+                    <img class="w-7 mr-5" src="img/stop.png" alt="">
                     <button type="button" id="hold">Passer la main</button>
                 </div>
             </div>
@@ -35,18 +39,20 @@
         <div class="grid lg:grid-cols-2  md:grid-rows-2 height-interface">
             <div id="sectionPlayer1" class="bg-violet-300 height-interface-lg grid grid-cols-6 gap-2">
                 <div class=" col-span-6"></div>
-                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl">
-                    <span id="player1">Player 1</span>
+                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl font-thin">
+                    <span id="player1"></span>
                 </div>
-                <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
-                    <span id="currentScorePlayer1">0</span>
+                <div
+                    class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl bg-slate-800 rounded-full center-object">
+                    <span id="currentScorePlayer1" class="text-white">0</span>
                 </div>
                 <div class=" col-span-6"></div>
-                <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
-                    <div>
+                <div
+                    class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl bg-slate-800 rounded-lg flex flex-col text-white pt-5">
+                    <div class="font-thin">
                         <span>Global</span>
                     </div>
-                    <div>
+                    <div class="text-4xl lg:text-6xl pt-3">
                         <span id="globalScorePlayer1">0</span>
                     </div>
                 </div>
@@ -54,18 +60,20 @@
             </div>
             <div id="sectionPlayer2" class="bg-violet-300 height-interface-lg grid grid-cols-6 gap-2">
                 <div class=" col-span-6"></div>
-                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl">
-                    <span id="player2">Player 2</span>
+                <div class="col-start-2 col-span-4 text-center text-4xl lg:text-5xl font-thin">
+                    <span id="player2"></span>
                 </div>
-                <div class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl">
-                    <span id="currentScorePlayer2">0</span>
+                <div
+                    class="col-start-3 col-span-2 text-center text-4xl lg:text-5xl bg-slate-800 rounded-full center-object">
+                    <span id="currentScorePlayer2" class="text-white">0</span>
                 </div>
                 <div class=" col-span-6"></div>
-                <div class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl">
-                    <div>
+                <div
+                    class="col-start-3 col-span-2 text-center grid-rows-2 text-xl lg:text-3xl bg-slate-800 rounded-lg flex flex-col text-white pt-3">
+                    <div class="font-thin">
                         <span>Global</span>
                     </div>
-                    <div>
+                    <div class="text-4xl lg:text-6xl pt-5">
                         <span id="globalScorePlayer2">0</span>
                     </div>
                 </div>

@@ -1,21 +1,21 @@
 // Add class Players
 class Players {
-  constructor (current, global, turn, name) {
+  constructor(current, global, turn, name) {
     this.current = current
     this.global = global
     this.turn = turn
     this.name = name
   }
 
-  addCurrent (current) {
+  addCurrent(current) {
     this.current += current
   }
 
-  initializeCurrent () {
+  initializeCurrent() {
     this.current = 0
   }
 
-  addGlobal () {
+  addGlobal() {
     this.global += this.current
     this.current = 0
   }
@@ -36,6 +36,12 @@ const globalScorePlayer1 = document.querySelector('#globalScorePlayer1')
 const currentScorePlayer2 = document.querySelector('#currentScorePlayer2')
 const globalScorePlayer2 = document.querySelector('#globalScorePlayer2')
 
+// Get Canvas for dice display
+const canvas = document.querySelector('#canvasDice')
+
+//
+let currentNumberDice = null
+
 // Initialize players object
 let player1 = new Players(0, 0, true)
 let player2 = new Players(0, 0, false)
@@ -43,11 +49,11 @@ whosTurn()
 askPlayerName().then(success, error)
 
 // Fonction for display prompt ask usernames
-function namePlayer (player) {
+function namePlayer(player) {
   return prompt(player + ' quel est votre prénom ?')
 }
 // Declaration of promise to verify the structure of usernames
-function askPlayerName () {
+function askPlayerName() {
   const regex = new RegExp('[a-z]')
   return new Promise((resolve, reject) => {
     const firstPlayer = namePlayer('Joueur 1')
@@ -61,18 +67,18 @@ function askPlayerName () {
     }
   })
 }
-function success () {
+function success() {
   titlePlayer1.innerHTML = player1.name
   titlePlayer2.innerHTML = player2.name
 }
-function error () {
+function error() {
   alert('Merci de saisir des noms de joueurs valides, ne doit pas contenir de chiffres, d\'espaces ou être vide.')
   askPlayerName().then(success, error)
 }
 // End of Promise
 
 // Function display, allow to refresh the screen
-function display () {
+function display() {
   currentScorePlayer1.innerHTML = player1.current.toString()
   globalScorePlayer1.innerHTML = player1.global.toString()
   currentScorePlayer2.innerHTML = player2.current.toString()
@@ -80,8 +86,78 @@ function display () {
 }
 // End of function display
 
+// Function displayDice, display the dice with the figure in canvas
+function displayDice() {
+  let ctx
+  if (canvas.getContext) {
+    ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, 300, 300)
+    ctx.beginPath()
+    ctx.strokeRect(50, 50, 200, 200)
+    switch (currentNumberDice) {
+      case 1:
+        ctx = canvas.getContext('2d')
+        ctx.arc(150, 150, 20, 0, Math.PI * 2)
+        ctx.fill()
+        break
+      case 2:
+        ctx.arc(100, 100, 20, 0, Math.PI * 2)
+        ctx.arc(200, 200, 20, 0, Math.PI * 2)
+        ctx.fill()
+        break
+      case 3:
+        ctx.arc(100, 100, 20, 0, Math.PI * 2)
+        ctx.arc(150, 150, 20, 0, Math.PI * 2)
+        ctx.arc(200, 200, 20, 0, Math.PI * 2)
+        ctx.fill()
+        break
+      case 4:
+        ctx.arc(100, 100, 20, 0, Math.PI * 2)
+        ctx.moveTo(100, 200)
+        ctx.arc(100, 200, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 100)
+        ctx.arc(200, 100, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 200)
+        ctx.arc(200, 200, 20, 0, Math.PI * 2)
+        ctx.fill()
+        break
+      case 5:
+        ctx.arc(100, 100, 20, 0, Math.PI * 2)
+        ctx.moveTo(100, 200)
+        ctx.arc(100, 200, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 100)
+        ctx.arc(200, 100, 20, 0, Math.PI * 2)
+        ctx.moveTo(150, 150)
+        ctx.arc(150, 150, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 200)
+        ctx.arc(200, 200, 20, 0, Math.PI * 2)
+        ctx.fill()
+
+        break
+      case 6:
+        ctx.arc(100, 100, 20, 0, Math.PI * 2)
+        ctx.moveTo(100, 200)
+        ctx.arc(100, 200, 20, 0, Math.PI * 2)
+        ctx.moveTo(100, 150)
+        ctx.arc(100, 150, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 150)
+        ctx.arc(200, 150, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 200)
+        ctx.arc(200, 200, 20, 0, Math.PI * 2)
+        ctx.moveTo(200, 100)
+        ctx.arc(200, 100, 20, 0, Math.PI * 2)
+        ctx.fill()
+        break
+      default:
+    }
+  } else {
+    console.log('Votre navigateur est trop ancien pour afficher le dès')
+  }
+}
+// End of displayDice function
+
 // Function Whos turn, allow to verify who's player is turn
-function whosTurn () {
+function whosTurn() {
   if (player1.turn !== true) {
     titlePlayer2.classList.add('player-active')
     titlePlayer1.classList.remove('player-active')
@@ -99,7 +175,7 @@ function whosTurn () {
 // End of function whos turn
 
 // Function controlGameFinish, allow to verify if a score as higher 100 points
-function controlGameFinish (player) {
+function controlGameFinish(player) {
   if (player1.global >= 100 || player2.global >= 100) {
     alert(`La partie est terminée, le joueur ${player.name} à remporté le jeu avec ${player.global} points`)
   }
@@ -107,7 +183,7 @@ function controlGameFinish (player) {
 // End of function controlGameFinish
 
 // Function changeTurnPlayer, allow change the turn for current player
-function changeTurnPlayer () {
+function changeTurnPlayer() {
   player1.turn = !player1.turn
   player2.turn = !player2.turn
 }
@@ -142,6 +218,8 @@ rollDice.addEventListener('click', e => {
     player1.initializeCurrent()
     player2.initializeCurrent()
   }
+  currentNumberDice = numberDice
+  displayDice()
   whosTurn()
   display()
 })
